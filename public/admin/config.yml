@@ -1,0 +1,42 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "posts"
+    label: "文章"
+    label_singular: "文章"
+    folder: "src/content/posts"
+    create: true
+    extension: "mdx"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    fields:
+      - label: "文件名（英文）"
+        name: "slug"
+        widget: "string"
+        hint: "用于网址，只写英文小写和连字符，例如 mcp-tutorial。发布后不要改。"
+      - label: "标题"
+        name: "title"
+        widget: "string"
+      - label: "一句话描述"
+        name: "description"
+        widget: "string"
+      - label: "日期"
+        name: "date"
+        widget: "datetime"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+      - label: "草稿（暂不发布）"
+        name: "draft"
+        widget: "boolean"
+        default: false
+        required: false
+      - label: "正文"
+        name: "body"
+        widget: "markdown"
+        modes: ["raw"]
+        default_mode: "raw"

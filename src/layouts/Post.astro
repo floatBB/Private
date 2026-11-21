@@ -1,0 +1,108 @@
+---
+import Base from './Base.astro';
+import { formatDate } from '../lib/format';
+
+interface TocItem {
+  depth: number;
+  slug: string;
+  text: string;
+}
+interface Props {
+  frontmatter: {
+    title: string;
+    description: string;
+    date: Date;
+  };
+  toc: TocItem[];
+}
+
+const { frontmatter, toc } = Astro.props;
+---
+<Base title={frontmatter.title} description={frontmatter.description}>
+  <div class="post-layout">
+    <aside class="aside">
+      <a class="back" href="/">← 返回</a>
+      <nav class="toc" id="toc">
+        <span class="toc-head">目录</span>
+        {toc.map((h, i) => (
+          <a class="toc-link" href={`#s${i + 1}`} data-target={`s${i + 1}`}>{h.text}</a>
+        ))}
+      </nav>
+    </aside>
+    <article class="article">
+      <h1 class="article-title">{frontmatter.title}</h1>
+      <p class="article-meta">{formatDate(frontmatter.date)}</p>
+      <div class="prose">
+        <slot />
+      </div>
+    </article>
+  </div>
+
+  <script>
+    // 左侧目录：点击滚动 + 高亮当前节
+    var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc-link'));
+    var sections = tocLinks.map(function (l) { return document.getElementById(l.dataset.target); });
+    tocLinks.forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        var el = document.getElementById(link.dataset.target);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+    function onScroll() {
+      var pos = window.scrollY + 140;
+      var current = sections[0];
+      sections.forEach(function (sec) {
+        var top = sec.getBoundingClientRect().top + window.scrollY;
+        if (top <= pos) current = sec;
+      });
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+        current = sections[sections.length - 1];
+      }
+      tocLinks.forEach(function (l) { l.classList.toggle('is-active', l.dataset.target === current.id); });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // 代码块自动加「复制」按钮
+    function copyText(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(text).catch(function () { return fallbackCopy(text); });
+      }
+      return fallbackCopy(text);
+    }
+    function fallbackCopy(text) {
+      return new Promise(function (resolve) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+        resolve();
+      });
+    }
+    document.querySelectorAll('.prose pre').forEach(function (pre) {
+      var code = pre.querySelector('code');
+      if (!code) return;
+      var block = document.createElement('div');
+      block.className = 'codeblock';
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'copy';
+      btn.textContent = '复制';
+      btn.addEventListener('click', function () {
+        copyText(code.innerText).then(function () {
+          btn.textContent = '已复制';
+          setTimeout(function () { btn.textContent = '复制'; }, 1500);
+        });
+      });
+      pre.parentNode.insertBefore(block, pre);
+      block.appendChild(btn);
+      block.appendChild(pre);
+    });
+  </script>
+</Base>

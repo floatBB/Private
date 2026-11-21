@@ -1,0 +1,25 @@
+---
+import { site } from '../site';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const fullTitle = title ? `${title} · ${site.name}` : `${site.name} — ${site.description}`;
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description ?? site.description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

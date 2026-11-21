@@ -1,0 +1,314 @@
+---
+title: "THE CULLY HILL BOYS — 项目简报"
+description: "一部全由 AI 生成的伦敦犯罪喜剧长片：资产、提示词、表演与制作的全套可复制方法论。"
+date: 2026-11-17
+---
+
+import VersionLogDemo from '../../components/VersionLogDemo.tsx';
+
+> 本文为项目简报的中文翻译。所有**提示词、声音块、命名格式、锁句、示例提示词**等「操作型内容」保留英文原文（实际生成时必须用英文），其余叙述性文字已译为中文。
+
+## 一句话梗概
+
+一部动作喜剧：三个混不出头的伦敦说唱歌手想出名，却意外卷进一场混乱的毒品战争。一部节奏快、好笑、踩着鼓点的犯罪片，讲忠诚、友谊，以及拒绝继续隐形。
+
+## 关于本项目
+
+### 电影
+
+CAL、HORACE 和 OLI 是三个快三十岁的伦敦说唱歌手，一事无成。他们对着空房间演了一场炸裂的演出，被场地背后的黑帮老大找上门，差点散伙。八品脱啤酒下肚后，Cal 有了主意：拍一支终极 MV——在一艘改装成热水浴缸的船上拍。在 Horace 叔叔的船店里，他们弄了条旧橡皮艇，把它推下楼梯——结果两百万英镑带血的毒资从船体里倾泻而出。所有人都来抢这笔钱：老大的手下、一个乌克兰杀手，还有这笔钱真正的主人——他抓走了 Cal 的女儿作抵押。接下来是糟糕的一天、一场枪战、一场注定是处决的交易，以及一列终结一切的火车的出现。两天后，三个男孩走出警局，成了全国新闻。
+
+### 数字
+
+片长 1 小时 54 分钟。137 场戏。2026 年 8 月 5 日在纽约首映。画布上放着 600 个已过审核的资产：74 张主角与反派卡、52 张配角与动物卡、90 个龙套角色、159 个道具，以及 200 多张场景底图。
+
+每一帧都是生成的。演员是真实签约的，但没有任何东西是用他们拍的：他们的肖像活在资产里，从那之后，只有资产进入镜头。没有布景，没有摄制组。唯一例外：一场打斗由特技演员编排、用手机拍下来作为动作参考。
+
+**工具。** 整部电影都在 Seedance 里生成——每一个镜头、所有视频和台词。脸和角色卡：Soul Cinema。编辑、反向机位和定点修改：Seedream 和 Nano Banana。提示词：Claude，分两个会话——一个写图像提示词，一个写视频提示词。之所以分开，是因为一个活儿里的规则会毒害另一个活儿：图像会话需要平光、反 CG 的措辞；视频会话需要以度数为单位的视场角和有动机的光。
+
+### 设定
+
+东南伦敦，2011 年。一片公屋住宅区，海盗电台里的 grime 音乐，一栋四层俱乐部——losers 在一楼演出，掌控整个区的人坐在顶楼。秋天，九月下旬：灰金色的光，湿漉漉的落叶，六点天黑。
+
+**年份是一条规则，不是装饰。** 画面里任何东西都不能晚于 2011 年——没有智能手机，人群里没有发光的屏幕，街上没有新款汽车。年份写进每一张场景底图，并在每一条提示词里重复。多一个拿着手机的群演，这个镜头就废了。
+
+### 演员阵容
+
+这部电影里有签约演员。Cal 是篮球运动员 Matt Kiatipis。Oli 是 UFC 选手 Israel Adesanya。Horace 是主播 N3on。Tobin 是 MMA 选手 Quinton "Rampage" Jackson。肖像被数字化：角色卡根据合约摄影照制作，所以卡上的脸就是演员本人的脸。从那之后，只有卡进入镜头。肖像权和声音权在第一帧生成之前就已通过合同锁定。
+
+每个角色还带一份「书面神态」——写的是角色，不是演他的那个人。每个主角一段话，在第一镜开拍前定死，逐字贴进每一条提示词：他怎么站、怎么说话、输了的时候脸会怎样。写一次，这份神态就能防止角色在下一个镜头里变成另一个人。
+
+**口音写成条件，从不写成标签。** 男孩们说的是南伦敦街头英语，Vernon 是压着嗓子的伦敦土话，Tika 说印度英语，Dmetry 说俄乌口音，Monty 说旁遮普英语。口音写在每一场的声音块里，在关键处还会在台词内部拼出来：th 变成 f 和 v、吞掉 h、喉塞 t、-ing 变成 -in'。一个角色一种口音，永不漂移。
+
+## 三个技能
+
+技能是 Claude 自己加载、然后照着干活的一本规则手册。一共三本，按使用顺序排列。
+
+**LIRA —— 图像提示词。** 你告诉它你要什么——这个角色处于这种状态、这个地点在这个时段——它就为卡或底图写出提示词。它掌握每种图像模型的薄弱点，并在你发送前逐条检查提示词。
+
+**CINEDANCE —— 视频提示词。** 内部有三部分。writer 构建整条提示词：拆解场景、设定调度、光学、物理和时间。auditor 在每条提示词发出前重新检查——空的第一帧、失效的标签、薄弱的地理、互相矛盾的两句话。workbench 把提示词当作文件保存，只修补失败的那一节。
+
+**THE ACTING SYSTEM PROMPT —— 表演。** 行为而非情绪、脸与身体的技巧、主档案格式。它的规则贯穿这份简报；完整版在附件里。
+
+## 我们从上一部电影继承了什么
+
+四样东西直接从《HELL GRIND》带过来并保留下来。场景上下文——每个镜头都以「戏上发生了什么、谁在里面、它跑多长」开头。第一帧空间锁——第一帧就已经占位，所有人各就各位，没有空的定场拍。每句台词之后一秒钟的静默——片段里留一段干净的尾巴，让剪辑师有接缝。细致的面部与表演节拍——脸和身体一个节拍一个节拍地写，而不是一个形容词。区别在于：上一部电影我们是边走边发现这些，而这一部开拍第一天它们就摆在那儿了。
+
+## 主要问题
+
+**一致性就是全部工作**：让每个角色、地点、物体在镜头之间保持不变。视频模型没有记忆。把你的主角描述得不完整，下一个镜头里他就会换一副长相、行为或声音。再加上镜头一移动就散架的空间、片段之间漂移的声音、丢失地理的场景。
+
+每个镜头都由「参考 + 文字」生成。资产承载画面；文字承载其余一切，包括几何——谁站在哪儿、摄影机在哪一侧、光在做什么。没有任何镜头是从一张静帧长出来的。唯一的例外是特技参考。
+
+## 分解与分镜表
+
+分解不是一张「要创建什么的清单」，而是把剧本变成一份已经内置导演构思的初步分镜表。每个镜头一张卡，卡上有四组内容。
+
+**材料：** 地点和 INT/EXT 及其覆盖资产；时间；画面里的每个人及其标签和状态变体；道具和车辆；动作，一到三句话；台词逐字；时长（秒）；复杂度。每张卡带场号和镜头的字母——50B、50C——这个编号同时留在卡上、版本日志里和提示词文件上。
+
+**方向：** 这个镜头的一句话目标；任务——角色为了得到他想要的东西做了什么，用一个动词；戏剧性——开头和结尾之间发生了什么变化；相对摄影机的调度；表演——脸和身体做什么，角色藏起了什么。
+
+**摄影机：** 景别、运动、镜头、角度。**剪辑：** 剪切类型、节奏、这个镜头怎么勾住下一个镜头。
+
+从那张卡出发，提示词几乎是机械地写出来的，漏洞在花掉一次生成之前就会暴露。
+
+## 前期制作：资产
+
+### 资产是什么
+
+资产是一对：文字 + 图像。文字是描述符，逐字进入每一条提示词。图像是模型锚定的参考。两者合起来让主角在镜头之间保持同一个人。所有资产都用 LIRA 生成。
+
+### 角色卡
+
+角色卡是一张图里的三个面板：正面全身、背面全身、一张大特写。提示词直说：同一个人，所有面板保持一致。特写用四分之三侧面——它同时展示脸的两个角度。
+
+**把全身人像的头去掉。** 在宽面板上脸又小又糊，而那正是模型会复制进广角镜头的那张脸。把头去掉，脸的来源就只剩一个：特写。
+
+**特写做两个版本——带笑和不带笑。** 否则角色第一次笑的时候，模型会凭空发明牙齿和下颌的行为。每个有台词的角色都值得做。
+
+**背景是纯中性灰，光要柔。** 避开「studio」这个词——模型可能会在画面里画出一间真的摄影棚。要写 "no studio, no equipment, no walls"。轮廓光也被禁了。卡上的手保持空着：出生在卡里的道具永远无法被丢下、扔出或夺走。
+
+### 状态与版本
+
+主角有多少种在电影里经历的状态，就有多少个资产。开场的 Cal——干净夹克、橙色背包。掉进泰晤士河之后的 Cal——湿透。第三幕的 Cal——裂开的眉毛、白 T 恤上的血。那是三个资产，不是「一个资产加一条备注」。新变体总是用同一种方式做：拿原始卡，只改变化的部分。而且新变体从不覆盖旧变体。
+
+于是有了元素命名格式，它在创建元素时、在提示词里命名它时、以及上传到画布时保持一致：
+
+```text
+@char_CB_Kel_v9                — 角色、项目代码、名字、版本
+@loc_CB_warehouse_s6_v2        — 地点，加上它为之建立的场次
+@loc_CB_kal_street_s5-46_v3    — 一张同时服务第 5 场和第 46 场的底图
+@prop_CB_gunTobin_s26_v2       — 道具、场次、版本
+@prop_CB_sedan_interior_back   — 汽车内饰是道具，不是地点
+```
+
+所有资产都放在一张画布上。**画布是项目的唯一事实来源：一个资产不在画布上，它就不在任何镜头里。**
+
+### 压力测试
+
+压力测试是视频测试。一张看起来完美的卡证明不了什么；关键是资产能否扛过运动。十次生成——不同动作、不同景别、不同地点——十次里有十次认得出。角色和地点要一起测，还要让他和将要同框的资产一起测。崩的时候，可能错在资产，而不只是提示词：先改文字；如果同样的崩坏再来一次，就重建资产。
+
+### 声音与口音
+
+声音不是资产，它是一组写得精确的条件，在写台词之前定下。角色完全按那个块所写的说话——没有外部克隆，没有重录。所以那个块要逐字贴进音频区，永不改变：
+
+```text
+CAL — voice: "A 25-year-old English man. Smooth, relaxed mid-range baritone;
+casual, unscripted, and conversational delivery; South London street accent —
+dropped h's, glottal t, -ing to -in'; nostalgic and warmly reflective."
+
+TIKA — voice: "A man in his thirties. High tenor, fast and theatrical; Indian
+English — retroflex t and d, full unreduced vowels, syllable-timed rhythm; a
+performed politeness that cracks into a screech when he is contradicted."
+```
+
+一个片段只放一个说话人和一句短台词。更长的对话写成单独的片段，回答放在下一个片段里。
+
+### 地点
+
+地点用四分之三视角生成广角或中景，不要正面：正面的房间图是平墙纸，模型读不出体积。每个地点留一个锚点——一根柱子、一盏灯、一张沙发——把调度拴在它上面。保持一种光逻辑：一个光源、一个阴影方向。底图里没有人也没有武器。用真实表面的语言对抗渲染感：锈、裂缝、胶带、指纹、油渍、水痕。
+
+反向机位可以从视频里拉出来：生成一段没有人的地点视频，摄影机慢慢穿过空间，截下需要的机位，丢进 Seedream 或 Nano Banana 改善质感。对话地点需要四分之三、正面、反面，以及每个主角各自的背景底图。
+
+### 外观与色彩
+
+外观和色彩在资产筹备阶段决定，不是在后期。电影分成若干「世界」，每个世界一种色调：住宅区是溺水的卡其绿和湿沥青；grime 现场是混凝土和一块 CRT 屏幕；妈妈的家是暖白配蜂蜜橡木；Vernon 的俱乐部是牛血红、桃花心木和失去光泽的金；警察系统是灰色混凝土，没有一丝暖调。
+
+在一个世界内部，画面是 80–85% 基础色域、10–15% 一到两种强调色、约 5% 反衬音。强调色不是调色调出来的——它是画面里有真实来源的一个物体。同一色相靠「工艺和年代」来区分，而不是靠深浅。
+
+## 前期制作：提示词
+
+### 十五块骨架
+
+每个正式的镜头都按同样的块、同样的顺序来写：SCENE CONTEXT · ACTIVE REFERENCES · LOCATION MAP · FIRST FRAME AND SPATIAL BLOCKING · FORMAT MODE · OPTICS · CAMERA · ACTION TIMING · PHYSICS · LIGHTING · AUDIO · CHARACTER ACTING · STYLE · QUALITY · POSITIVE CONSTRAINTS。
+
+**没有负面块。** 一条禁令要写成相应区里的「期望结果」。每个标签只出现一次，放在 ACTIVE REFERENCES 里。地点参考带一条明确的「禁止继承」——它控制几何、材质、光和氛围，但从不控制构图。每次生成的预算：九张图像参考、三个视频参考、三个音频参考。
+
+### 示例提示词：第 102F 场，后台走廊
+
+Oli 在画外想踹开门；Cal 和 Horace 看着。这是发往模型的完整提示词：
+
+```text
+OPTICS: 200mm long telephoto (FOV ≈12°) — heavy compression, SHALLOW depth of field; a tight CLOSE-UP two-shot of the two lads' faces, corridor compressed and soft behind.
+CAMERA: ONE continuous shot on a BREATHING HANDHELD — a calm living float (SETTLE feel) on Cal & Horace, who watch OLI off-screen behind the camera; their eyelines sit just BESIDE and slightly ABOVE the lens — NEVER into the lens. When they leave, the CAMERA STAYS PUT — no pan, no follow. No cuts, no slow-motion.
+LIGHTING: overhead cool-white FLUORESCENT box-fixtures, cool downward pools; cold cyan-teal field, red-brick + white-painted brick; lone warm note = small dull-RED FIRE-EXIT glow deep behind them. Low-key, deep shadow, true negative fill, never flat front light.
+MOVEMENT NOTE: Cal and Horace react on DIFFERENT rhythms and DIFFERENT intonations — Cal the silent weary facepalm, Horace the exasperated deadpan talker; never mirrored.
+
+REFERENCES
+@loc_CB_commons_backstage (THE COMMONS — BACKSTAGE CORRIDOR, night): cool-white fluorescent box-fixtures, white-painted brick + red brick walls, a WHITE DOOR (SHUT the entire take) and dark column mid-corridor, dark-GREEN fire-exit doors (SHUT the entire take), flight cases + coiled cable, milk crates, a stage WEDGE MONITOR, dark concrete floor. EVERY door visible in this frame stays CLOSED and MOTIONLESS from first frame to last. Controls geometry, materials, light and atmosphere ONLY — not framing.
+@char_CB_Kel (CAL — beaten, frame-LEFT): late-20s, thin/exhausted, messy dark hair, stubble, FACE scrapes + scalp HEAD WOUND, BLOODIED dirty white tee, grey cargo trousers, blue trainers. The TALLER of the two — his head-top clearly the HIGHER head in frame. 100% matches.
+@char_CB_Horace (HORACE — frame-RIGHT): younger man, curly black hair, glasses, light beard; GREEN cropped jacket over navy tee, baggy grey jeans, olive trainers; thin and narrow; about 10 CM SHORTER than Cal — his eye-line sits at the level of Cal's MOUTH, his head-top clearly LOWER in frame. 100% matches.
+(OLI — OFF-SCREEN ONLY, no reference loaded: he is NEVER visible — not a limb, not a shoulder, not a shadow, not a reflection; the door he kicks is BEHIND the camera and never enters frame; his two failed kicks and the final door-opening happen strictly BEHIND THE CAMERA — UNSEEN and SILENT.)
+
+HORACE VOICE (verbatim): "A 20-year-old English man. High-pitched, nasally tenor; rapid, erratic delivery; South London street accent; natural conversational stutters." — HERE: flat, tired, nasal, deadpan exasperation; he says his ONE line and then stays SILENT for the rest of the take.
+CAL VOICE (verbatim, non-verbal): "A 25-year-old English man. Smooth, relaxed mid-range baritone; South London street accent." — HERE: a heavy weary sigh only, no words.
+
+FORMAT — ~12–14 seconds, real-time, ONE continuous shot, no cuts, no fades. NO music score — muffled gig bleed only. NO off-screen kick/door sounds. NO slow-motion.
+
+——— THE SHOT ———
+0.0s–3.0s — 200mm tight two-shot, positioned BACK in the corridor by the WHITE DOOR and the dark column: CAL (frame-LEFT, the taller head) and HORACE (frame-RIGHT, head-top lower) watch OLI (OFF-SCREEN behind the camera), eyelines just BESIDE the lens. At ~1.5s the FIRST unseen kick happens — and IN THE SAME SECOND their faces SOUR: a slow unimpressed blink from Cal, Horace's brows knitting in disappointment.
+3.0s–6.0s — at ~4.0s the SECOND unseen kick fails — same-second reactions: CAL exhales a heavy weary SIGH, eyes briefly closing, and brings ONE hand up to DRAG SLOWLY DOWN his face. Horace's head tilts, incredulous.
+6.0s–8.5s — HORACE, flat and nasal and exasperated, calls out toward Oli off-screen — eyes beside the lens, not into it: "Pull it, Oli." — a tiny eye-roll, a limp gesture toward the unseen door. After this line NOBODY speaks again.
+8.5s–11.0s — at ~9.0s, strictly BEHIND THE CAMERA, Oli finally gets his unseen door open (silent, invisible — NOTHING in frame moves) — same-second reads, both SILENT: Cal a tiny relieved-but-unimpressed nod, Horace a small "there you go" eyebrow-raise.
+11.0s–13.5s — CAL and HORACE EXCHANGE A LOOK — Horace flicks first with a weary eye-roll, Cal meets it with a tired headshake and the ghost of a fond smirk — then, still SILENT, both walk FORWARD, PAST the camera and OUT of frame: CAL on the LEFT of the lens, HORACE on the RIGHT, never crossing — while the CAMERA STAYS PUT. END on the empty corridor.
+
+CHARACTER ACTING
+CAL (left, the taller, silent weary): unimpressed slow blink on the first fail; on the second, the heavy sigh and the ONE slow hand down his face — bone-tired; the tired headshake with a flicker of fondness on the exchange. EYE-LIFE: weary, real blinks, eyes to Oli off-screen then to Horace.
+HORACE (right, ~10 cm shorter, exasperated talker): brows up, incredulous head-tilt, a hand half-raised in disbelief; the line lands FLAT and put-upon, with a small eye-roll and a limp point at the unseen door. Completely DIFFERENT rhythm from Cal, never mirrored. EYE-LIFE: lively, darting, real blinks behind the glasses.
+
+POSITIVE LOCKS
+HEIGHT RULER: Cal is the TALLER — HORACE about 10 cm shorter, his eye-line at Cal's mouth level, his head-top clearly LOWER in frame. OFF-SCREEN LOCK: Oli is NEVER visible — not a limb, not a shadow, not a reflection; kicks and door-opening are UNSEEN and SILENT, read only in the two faces. IN-FRAME DOORS LOCK: every door VISIBLE in frame stays SHUT and MOTIONLESS the entire take; NOTHING in frame opens or moves at ~9.0s or any other moment. EYELINE LOCK: both eyelines sit just BESIDE the lens — NEVER into it. SPEECH COUNT LOCK: the ENTIRE take contains exactly ONE spoken line — Horace's three words "Pull it, Oli." at ~6.0s; after it his mouth stays CLOSED to the final frame; no ad-libs, no mumbling, no speech in ANY language; Cal speaks ZERO words. EVENT TIMECODES (reactions land IN THE SAME SECOND, never a beat late): kick ~1.5s → faces sour; kick ~4.0s → the sigh and the hand down the face; ~6.0s the line; ~9.0s the unseen door opens; ~11.0s the exchanged look → both walk past the lens, camera stays put. Colour 60:30:10. Nothing modern beyond 2011.
+```
+
+### 光学
+
+光学用度数写，不用毫米，锚定在一把十档梯子上：180° · 135° · 107° · 84° · 63° · 47° · 29° · 18° · 12° · 8°。原生区间 29–84° 出来的东西可靠；超出这个区间风险就开始上升。
+
+主要法则是：内容决定镜头。模型不认数字——它从画面里有什么来推断镜头。而且镜头必须每个镜头锁死：one lens per shot。长焦需要整套「观察模式」才能保持住：
+
+```text
+8° diagonal field of view, super-telephoto observation lens character, camera 20
+to 25 meters from subject. Extreme background compression, background flattened
+into a soft colour wash, only the subject is sharp, everything else dissolves into
+creamy bokeh. Foreground occlusion is mandatory: blurred foreground objects occupy
+the lower 30 to 45 percent of frame as oversized dark bokeh shapes.
+```
+
+### 地理：主镜头与空间地图
+
+每场戏都以一个主镜头开场。一个固定调度的广角，大约一秒，没有台词没有动作：模型拍下这个布局，并在这一场接下来的每个镜头里保持住。主镜头之下压着空间地图——几行字的地板平面图，每场戏写一次，然后原样贴进这场戏的每一个镜头。它治好了早期最贵的毛病：主角瞬移、互换位置、摄影机跳到房间另一侧。
+
+```text
+Compass for this scene: the WINDOW WALL is the camera side (all coverage shoots
+from the window side — the 180° line is never crossed); the STAGE is deep
+frame-RIGHT; the red EXIT double door sits beside the stage frame-right; the
+chair rows fill the middle of the hall facing the stage.
+CAL stands at the second chair row, arm's length from the aisle; OLI at the
+stage edge, one long stride from the EXIT door; HORACE by the mixing desk.
+EXACTLY THREE people, nobody else, the hall otherwise empty.
+```
+
+位置来自底图里看得见的东西，而不是距离。米对模型毫无意义。把每个身体拴到一个它看得见的标志物上——灯、第二排椅子、舞台边、门。说明摄影机在哪一侧、它永远不越哪条线。静态对话给房间的一个角落而不是整个房间。
+
+### 表演
+
+表演和外观、声音一样被锁死，而且它有自己的系统提示词。每个主角一段行为段落，开拍前写一次。每个人、每条提示词的默认项：eye-life——微扫视、一个明确命名的注视目标、真实的眨眼频率、鲜活的 catchlights。
+
+**行为，而非感受。** 一场活的戏是一个想要什么的主角、挡路的东西、以及他去争取的行动。情绪从这场打斗里长出来。给模型一个目标和障碍，然后让他的打斗方式在戏里变化：他开玩笑 → 失败 → 他施压 → 失败 → 他哀求。
+
+**物理，而非形容词。** 写 "sad"、"angry" 时，模型即兴发挥，给出浅薄的结果。要写深层的情绪，就描述肌肉的做功：一次颤抖、咬紧又放松的下巴、收紧的颧骨。在肌肉之上，意图——一行内心独白，标注为不出声。这是它落在同一镜头里两个主角身上的样子：
+
+```text
+CAL — INNER LINE (unspoken, never voiced, never subtitled): "this room used to be
+the whole world." Micro-acting built from it: for once the ADHD engine IDLES — the
+fast jittery stride carries him up the aisle, fingers worrying a loose thread — and
+then, looking at the stage, he actually STOPS: a rare full stillness, the fidget
+dying mid-motion; eyes make one slow pass along the stage edge and settle there; a
+small swallow; the half-smile arrives late and soft, not performed.
+
+OLI — INNER LINE (unspoken): "don't let them see it means something." The swagger
+walks in first — chin back, shoulders rolling once, the appraising squint of a man
+pricing the room — but the eyes betray him: they snag on the stage a half-second
+too long, one sharp nostril flare, a jaw clench swallowed down
+```
+
+一个「活镜头」的三个标志：反应在对方台词结束前就开始；情绪不会瞬间关掉，重场之后的尾巴带进下一个片段；手一直忙着——主角不是「在对话」，他在修东西、数钱、倒酒，一边干一边说。
+
+### 音乐场景：说唱与对口型
+
+视频模型不会表演你的歌。让它说唱，你得到的是一张对空气动的嘴。所以音乐从来不由模型出：先写好、录好歌，然后让模型来「表演」它。歌要先做完，切成约十二秒一块，切点落在换气处。生成时音频关掉，人声仍然驱动对口型——因为嘴是从波形里长出来的。两个附加项：
+
+```text
+@[Video 1](video_1) — THE TRACK THEY ARE PERFORMING (this file carries the
+12-second block of HORACE'S VERSE). The audio of this file IS the live performance.
+HORACE SPITS THIS VERSE: his mouth carves EVERY syllable of the Video 1 vocal
+exactly as it lands — rap is near-continuous, so his mouth rests ONLY in the file's
+own breath-gaps. (The file's own picture is black filler — the image never comes
+from Video 1, only the TRACK does.)
+```
+
+```text
+LYRICS OF THIS BLOCK (as heard in Video 1 — the FILE is the truth: if the block
+starts or ends mid-line, the mouth follows the FILE, not this text): "You better
+make it clear bruv. 'Cos if you climb that hill you better recognize the skill
+blud…"
+
+LIP-SYNC LOCK (HARD) — Horace's mouth belongs to the Video 1 vocal and to NOTHING
+else. FRAME-ACCURATE: every syllable shaped exactly as it sounds; no lag, no drift,
+no idle mouth — if the mouth misses the timing of a bar, the take is wrong.
+
+MOUTH OWNERSHIP — every audible word belongs to Horace. The other mouths are ALIVE
+— open-mouthed laughter, whoops, silent 'heeey's — but they NEVER imitate, echo or
+mouth the lyric's words.
+```
+
+## 制作
+
+### 组织与日志
+
+工作按场景块推进，按电影顺序。每个镜头有编号、时长和完整提示词。批量生成，每次迭代都是外科手术式的：只改一行，其余逐字不变。一切都进日志——版本、改了什么、结论。这个例子是 137 条，日志显示哪些镜头最顽固：v15、v10、v9。
+
+<VersionLogDemo client:visible />
+
+### 省下生成次数的修法
+
+- 十五到二十次生成之后，去找另一个方案，而不是更好的句子。把镜头一分为二、去掉一个动作、换个角度。
+- 复杂动作绝不放在时间线的中间——放在提示词开头，靠近门的过程是单独的镜头。
+- 人群是一个资产，带一个身高和衣着的范围。超过十五人，人群就会塌缩成三到五个人形。
+- 汽车内饰是自己的资产，和汽车、和地点都分开。
+- 如果模型一直画出没要的东西，就点名禁止它。
+
+### 法则，而非请求
+
+当一条规则有了名字、画面里有可见的证据、以及一句「什么算坏镜头」的话，它就成了法则。四条反复用：
+
+- 尺度由三样东西同时设定——一个真实世界的度量、一个画面占比、以及和一个已经在画面里的物体的对比。
+- 身高用「往哪个方向失败」来设定。
+- 物体数量一帧一帧地写，因为模型在运动里会复制道具。
+- 情绪从两侧夹住，因为写成一个词的语气会以漫画脸出现。
+
+### 剪辑并行
+
+剪辑和生成同时跑。剪辑师随着场景抵达就组装，并点单缺什么。重拍只要几分钟，所以剪辑塑造制作，而不是等着制作。生成几乎总是节奏偏慢：剪得比你感觉该剪的更狠，并计划剪掉每个片段最前和最后半秒。
+
+## 后期制作
+
+画面锁定之后，是单独的打磨环节。有些镜头需要——招牌上的字、车牌、一个小瑕疵——这些逐帧修。一个真正坏掉的镜头则重新生成，用存下来的最终提示词改一行。第一优先：脸和手的特写。所有这些都在调色之前。
+
+监督生成本身是一份工作，不是一个愿望。有人盯着组装好的成片，找那些「技术上存在但不对」的镜头，然后用一个指名道姓的修法把它们打回。调色从统一开始：每一次生成都自带一套内置的调色，所以调色师先把相邻镜头拉到一个观感。没有重录声音：台词直接从生成里清理。音效设计和音乐铺在连续的环境声之上。
+
+## 结论
+
+五条规则撑住整部电影。
+
+1. **资产先行。** 在每一个角色、地点和道具都锁定、命名、带版本、压测过之前，不拍一个镜头。
+2. **每次都把一切描述清楚。** 模型没有记忆。描述符逐字进每条提示词，永不缩短。
+3. **一次只改一样。** 每次迭代一行，一切都进日志。
+4. **给模型更少的自由。** 一个角落而不是一个房间，一个标志物而不是开阔地，一张地图而不是猜测。
+5. **如果就是成不了，简化镜头，而不是简化措辞。** 一分为二、去掉一个动作、换个角度。
+
+这里的每一条规则都存在，是因为有一个镜头缺了它就失败。这套流程不需要大团队——它需要的是守规则，而且它能缩到一个人的团队。
+
+## 附件清单
+
+CINEDANCE 技能包（writer、auditor、workbench 和发送前自检），LIRA 图像技能，含主档案格式的表演系统提示词，视觉与色彩圣经，五个世界的风格前缀，含十档 FOV 锚点的光学参考，含各口音的声音系统，带对口型锁的音乐场景提示词，以及包含全片每个镜头完整文本和版本历史的提示词库。
